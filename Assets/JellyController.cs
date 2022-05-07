@@ -26,11 +26,14 @@ public class JellyController : MonoBehaviour
 
         float size = 1f + 0.1f * inventoryCount;
         transform.localScale = new Vector3(size, size, size);
+        print(size);
 
         foreach (var child in inventory.GetComponentsInChildren<Transform>())
         {
-            float childSize = 1f / size;
+            float childSize = 0.5f;
             child.localScale = new Vector3(childSize, childSize, childSize);
+            // Move each child to a slightly randomized position
+            child.position = child.position + Random.insideUnitSphere * 0.01f;
         }
 
         var gamepad = Gamepad.current;
@@ -85,7 +88,7 @@ public class JellyController : MonoBehaviour
             go.GetComponent<Rigidbody>().isKinematic = true;
             go.GetComponent<Collider>().enabled = false;
             go.transform.parent = inventory;
-            go.transform.position = inventory.position;
+            go.transform.position = inventory.position + Random.insideUnitSphere * transform.localScale.x * 0.5f;
         }
     }
 }
