@@ -275,7 +275,7 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b2387b29-fb75-4d8c-ac38-9cf415c16225"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/#(E)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
