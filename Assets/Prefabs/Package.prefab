@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinToBeforeSettle: 1
+  Assets: {fileID: 11400000, guid: 369efb5809d525746a27f98a11d57f71, type: 2}
 --- !u!54 &5807037600631053257
 Rigidbody:
   m_ObjectHideFlags: 0

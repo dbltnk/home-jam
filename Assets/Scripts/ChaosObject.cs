@@ -3,6 +3,8 @@ using UnityEngine;
 public class ChaosObject : MonoBehaviour
 {
     [SerializeField] private float MinToBeforeSettle = 1f;
+    [SerializeField] private Assets Assets;
+    [SerializeField] private bool CanSpawnGhost;
 
     private bool HasFoundInitial;
     private Vector3 InitialPosition;
@@ -28,6 +30,7 @@ public class ChaosObject : MonoBehaviour
     public bool CanBePickedUp => CurrentState == State.SETTLED;
 
     private Rigidbody _rigidbody;
+    private GhostObject Ghost;
 
     void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
@@ -50,13 +53,29 @@ public class ChaosObject : MonoBehaviour
             HasFoundInitial = true;
             InitialPosition = transform.position;
             InitialRotation = transform.rotation.eulerAngles;
+            if (CanSpawnGhost)
+            {
+                SpawnGhost();
+            }
         }
         CurrentState = State.SETTLED;
+    }
+
+    private void SpawnGhost()
+    {
+        var go = Instantiate(Assets.GhostPrefab, transform.position, transform.rotation);
+        Ghost = go.GetComponent<GhostObject>();
+        Ghost.TakeShape(gameObject);
+        go.SetActive(false);
     }
 
     public void PickUp()
     {
         CurrentState = State.CARRIED;
+        if (Ghost != null)
+        {
+            Ghost.gameObject.SetActive(true);    
+        }
     }
 
     public void Release()

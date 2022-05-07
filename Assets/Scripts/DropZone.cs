@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class DropZone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool ObjectHasBeenDelivered;
+
+    void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.GetComponent<DeliverObject>() != null) {
+            ObjectHasBeenDelivered = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.GetComponent<DeliverObject>() != null) {
+            ObjectHasBeenDelivered = false;
+        }
     }
 }

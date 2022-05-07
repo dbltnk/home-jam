@@ -7,7 +7,7 @@ public class ChaosCounter : MonoBehaviour
 {
     ChaosObject[] chaosObjects;
     public float Chaos;
-    private TMP_Text text;
+    public TMP_Text text;
 
     void Awake() {
         text = GetComponent<TMP_Text>();

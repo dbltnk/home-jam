@@ -9,10 +9,17 @@ public class Main : MonoBehaviour
     
     private JellyInputs Inputs;
 
+    public GameObject WinText;
+
+    private StartZone start;
+    private DropZone drop;
+
     void Awake()
     {
         Inputs = new JellyInputs();
         Inputs.Enable();
+        start = FindObjectOfType<StartZone>();
+        drop = FindObjectOfType<DropZone>();
     }
 
     void Update()
@@ -21,5 +28,11 @@ public class Main : MonoBehaviour
         {
             SceneManager.LoadScene(MainLevel);
         }
+
+        if (start.PlayerIsInStartZone && drop.ObjectHasBeenDelivered)
+        {
+            WinText.SetActive(true);
+        }
     }
+
 }
