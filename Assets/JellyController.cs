@@ -91,6 +91,7 @@ public class JellyController : MonoBehaviour
 
     void CaptureObject(GameObject go)
     {
+        go.GetComponent<ChaosObject>().PickUp();
         go.GetComponent<Rigidbody>().isKinematic = true;
         go.GetComponent<Collider>().enabled = false;
         go.transform.parent = inventory;
@@ -99,6 +100,7 @@ public class JellyController : MonoBehaviour
 
     void ReleaseObject(GameObject go)
     {
+        go.GetComponent<ChaosObject>().Release();
         go.GetComponent<Rigidbody>().isKinematic = false;
         go.GetComponent<Collider>().enabled = true;
         go.transform.SetParent(null);
@@ -108,7 +110,8 @@ public class JellyController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject go = collision.gameObject;
-        if (go.GetComponent<ChaosObject>() != null) {
+        ChaosObject co = go.GetComponent<ChaosObject>(); 
+        if (co != null && co.CanBePickedUp) {
             CaptureObject(go);
         }
     }
