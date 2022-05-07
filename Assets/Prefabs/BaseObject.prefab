@@ -50,6 +50,9 @@ MonoBehaviour:
   MinToBeforeSettle: 1
   Assets: {fileID: 11400000, guid: 369efb5809d525746a27f98a11d57f71, type: 2}
   CanSpawnGhost: 1
+  ObjectType: {fileID: 0}
+  TimeStampLastReleased: 0
+  PickupTimeoutAfterRelease: 1
 --- !u!54 &7443867922456266356
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92,5 +95,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899f72fd3721ab34394714cd07f3594b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttractionDistance: 2.5
-  AttractionForce: 100
+  AttractionDistance: 1.5
+  AttractionForce: 35
