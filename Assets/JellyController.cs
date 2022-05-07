@@ -15,6 +15,8 @@ public class JellyController : MonoBehaviour
     
     private Transform inventory;
     private float inventoryCount => inventory.childCount;
+
+    private MeshRenderer[] meshRenderers;
         
     private void Awake()
     {
@@ -22,6 +24,8 @@ public class JellyController : MonoBehaviour
         Inputs.Enable();
         Rigidbody = GetComponent<Rigidbody>();
         inventory = transform.Find("Inventory");
+        // find all meshrenderers in the scene
+        meshRenderers = FindObjectsOfType<MeshRenderer>();
     }
     public static float MapIntoRange (float value, float from1, float to1, float from2, float to2) {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2; 
@@ -29,12 +33,28 @@ public class JellyController : MonoBehaviour
 
     private void Update()
     {
+        
 
         float size = Mathf.Min(1f + 0.05f * inventoryCount, 3f);
         transform.localScale = new Vector3(size, size, size);
 
         float fov = MapIntoRange(size, 1f, 3f, 60f, 90f);
         Camera.fieldOfView = fov;
+
+
+        foreach (var meshRenderer in meshRenderers) {
+            meshRenderer.enabled = true;
+        }
+
+        // cast a ray from the camera to the transform
+        Ray ray = new Ray(Camera.transform.position, transform.position - Camera.transform.position);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            CanBecomeInvis c = hit.collider.GetComponent<CanBecomeInvis>();
+            Renderer r = hit.collider.GetComponent<Renderer>();
+            if (c != null && r != null) r.enabled = false;
+        }
         
         foreach (Transform child in inventory)
         {
