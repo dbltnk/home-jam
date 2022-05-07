@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ChaosObject : MonoBehaviour
 {
-    public static readonly List<ChaosObject> ActiveObjects = new List<ChaosObject>(); 
+    public static readonly List<ChaosObject> ActiveObjects = new List<ChaosObject>();
     
     [SerializeField] private float MinToBeforeSettle = 1f;
     [SerializeField] private Assets Assets;
     [SerializeField] private bool CanSpawnGhost;
+    [SerializeField] private ObjectType ObjectType;
 
     private bool HasFoundInitial;
     private Vector3 InitialPosition;
@@ -98,10 +98,6 @@ public class ChaosObject : MonoBehaviour
     public void PickUp()
     {
         CurrentState = State.CARRIED;
-        //if (Ghost != null)
-        //{
-        //    Ghost.gameObject.SetActive(true);    
-        //}
     }
 
     public void Release()

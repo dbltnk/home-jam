@@ -13,6 +13,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7552899502131014819, guid: b6d1dbe278d259548a773c5c74ffae61,
         type: 3}
+    - target: {fileID: 2729246119031780009, guid: ef24dac9795bb944387abd84d1536341,
+        type: 3}
+      propertyPath: ObjectType
+      value: 
+      objectReference: {fileID: 11400000, guid: f9ff9b5575c8f29429a37e356a5b89fc,
+        type: 2}
     - target: {fileID: 4258648428330343421, guid: ef24dac9795bb944387abd84d1536341,
         type: 3}
       propertyPath: m_RootOrder
@@ -71,7 +77,7 @@ PrefabInstance:
     - target: {fileID: 7960494350225045586, guid: ef24dac9795bb944387abd84d1536341,
         type: 3}
       propertyPath: m_Name
-      value: Chair0d
+      value: Chair0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef24dac9795bb944387abd84d1536341, type: 3}
