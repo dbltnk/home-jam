@@ -33,14 +33,11 @@ public class JellyController : MonoBehaviour
 
     private void Update()
     {
-        
-
         float size = Mathf.Min(1f + 0.05f * inventoryCount, 3f);
         transform.localScale = new Vector3(size, size, size);
 
         float fov = MapIntoRange(size, 1f, 3f, 60f, 90f);
         Camera.fieldOfView = fov;
-
 
         foreach (var meshRenderer in meshRenderers) {
             meshRenderer.enabled = true;
@@ -58,7 +55,7 @@ public class JellyController : MonoBehaviour
         
         foreach (Transform child in inventory)
         {
-            float childSize = 0.25f;
+            float childSize = 0.5f;
             child.localScale = new Vector3(childSize, childSize, childSize);
             // Move each child to a slightly randomized position
             child.position = child.position + Random.insideUnitSphere * 0.01f;
