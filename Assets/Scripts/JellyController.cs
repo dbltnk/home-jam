@@ -76,7 +76,7 @@ public class JellyController : MonoBehaviour
             var count = inventory.childCount;
             if (count > 0) {
                 // get the first child of the inventory
-                Transform child = inventory.GetChild(0);
+                Transform child = inventory.GetChild(count-1);
                 ReleaseObject(child.gameObject);
             }
         }
