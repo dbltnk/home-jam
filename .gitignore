@@ -61,3 +61,6 @@ crashlytics-build.properties
 .idea
 home-jam.sublime-workspace
 UserSettings
+ProjectSettings/Packages/com.unity.polybrush/Settings.json
+ProjectSettings/Packages/com.unity.probuilder/Settings.json
+ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
