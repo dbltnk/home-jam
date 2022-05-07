@@ -24,11 +24,11 @@ public class ChaosCounter : MonoBehaviour
         foreach (var chaosObject in chaosObjects)
         {
             if (chaosObject.Settled) {
-                Chaos += chaosObject.PosChaos + chaosObject.RotChaos;
+                Chaos += chaosObject.PosChaos;// + chaosObject.RotChaos;
             }     
         }
 
-        text.text = "Chaos: " + Chaos.ToString("0.00");
+        text.text = "Chaos: " + Chaos.ToString("0");
 
     }
 }

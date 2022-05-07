@@ -8,8 +8,8 @@ public class ChaosObject : MonoBehaviour
     public Vector3 InitialPosition;
     public Vector3 InitialRotation;
 
-    public float PosChaos => (transform.position - InitialPosition).magnitude;
-    public float RotChaos => (transform.rotation.eulerAngles - InitialRotation).magnitude;
+    public float PosChaos => (Settled) ? (transform.position - InitialPosition).magnitude : 0f;
+    public float RotChaos => (Settled) ? (transform.rotation.eulerAngles - InitialRotation).magnitude : 0f;
 
     private Rigidbody _rigidbody;
 
