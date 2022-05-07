@@ -11,14 +11,28 @@ public class JellyController : MonoBehaviour
     [SerializeField] private float ChargePerSecond;
     [SerializeField] private float Force;
     [SerializeField] private float ForceUpwards; 
+
+    private Transform inventory;
+    private float inventoryCount => inventory.childCount;
         
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        inventory = transform.Find("Inventory");
     }
 
     private void Update()
     {
+
+        float size = 1f + 0.1f * inventoryCount;
+        transform.localScale = new Vector3(size, size, size);
+
+        foreach (var child in inventory.GetComponentsInChildren<Transform>())
+        {
+            float childSize = 1f / size;
+            child.localScale = new Vector3(childSize, childSize, childSize);
+        }
+
         var gamepad = Gamepad.current;
         if (gamepad == null)
             return; // No gamepad connected.
@@ -62,5 +76,16 @@ public class JellyController : MonoBehaviour
         Gizmos.color = Color.magenta;
         var dirOnPlane = CalcMoveDirection();
         Gizmos.DrawLine(transform.position, transform.position + dirOnPlane);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject go = collision.gameObject;
+        if (go.GetComponent<ChaosObject>() != null) {
+            go.GetComponent<Rigidbody>().isKinematic = true;
+            go.GetComponent<Collider>().enabled = false;
+            go.transform.parent = inventory;
+            go.transform.position = inventory.position;
+        }
     }
 }
