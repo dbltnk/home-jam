@@ -126,8 +126,9 @@ public class JellyController : MonoBehaviour
         go.transform.SetParent(null);
         go.transform.localScale = Vector3.one;
         // add a force in the camera direction
-        go.transform.position = transform.position + new Vector3(0f, 1.25f, 0f);
-        var forceDir = Camera.transform.forward.normalized * 1000f;
+
+        go.transform.position = transform.position + Vector3.ProjectOnPlane(Camera.transform.forward, Vector3.up).normalized / 1.5f + Vector3.up / 1.5f; //new Vector3(0f, 1.25f, 0f) + transform.forward;
+        var forceDir = Camera.transform.forward.normalized * 100f;
         go.GetComponent<Rigidbody>().AddForce(forceDir);
     }
     

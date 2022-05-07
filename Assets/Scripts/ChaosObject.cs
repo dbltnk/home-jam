@@ -31,7 +31,10 @@ public class ChaosObject : MonoBehaviour
     public bool Settled => CurrentState == State.SETTLED;
     public bool Carried => CurrentState == State.CARRIED;
 
-    public bool CanBePickedUp => CurrentState == State.SETTLED;
+    public float TimeStampLastReleased;
+
+    public float PickupTimeoutAfterRelease = 1f;
+    public bool CanBePickedUp => Time.time - TimeStampLastReleased > PickupTimeoutAfterRelease; //CurrentState == State.SETTLED;
 
     public bool HasBeenMoved => PosChaos >= 1f || RotChaos >= 1f;
 
@@ -104,5 +107,6 @@ public class ChaosObject : MonoBehaviour
     {
         CurrentState = State.WAITING_TO_SETTLE;
         WaitingToSettleStartTime = Time.time;
+        TimeStampLastReleased = Time.time;
     }
 }
