@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class ChaosObject : MonoBehaviour
 {
-    public bool HasFoundInitial;
-    public Vector3 InitialPosition;
-    public Vector3 InitialRotation;
-    public float WaitingToSettleStartTime;
-    public float MinToBeforeSettle = 1f;
+    [SerializeField] private float MinToBeforeSettle = 1f;
+
+    private bool HasFoundInitial;
+    private Vector3 InitialPosition;
+    private Vector3 InitialRotation;
+    private float WaitingToSettleStartTime;
     
     public enum State
     {
@@ -15,7 +16,9 @@ public class ChaosObject : MonoBehaviour
         CARRIED,
     }
     
-    public State CurrentState;
+    private State CurrentState;
+
+    public bool ContributesToChaos => HasFoundInitial;
     
     public float PosChaos => HasFoundInitial ? (transform.position - InitialPosition).magnitude : 0f;
     public float RotChaos => HasFoundInitial ? (transform.rotation.eulerAngles - InitialRotation).magnitude : 0f;
