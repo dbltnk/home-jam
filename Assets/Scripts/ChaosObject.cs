@@ -18,7 +18,7 @@ public class ChaosObject : MonoBehaviour
     
     private State CurrentState;
 
-    public bool ContributesToChaos => HasFoundInitial;
+    public bool ContributesToChaos => HasFoundInitial && GetComponent<DeliverObject>() == null;
     
     public float PosChaos => HasFoundInitial ? (transform.position - InitialPosition).magnitude : 0f;
     public float RotChaos => HasFoundInitial ? (transform.rotation.eulerAngles - InitialRotation).magnitude : 0f;
