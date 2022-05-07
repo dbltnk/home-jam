@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ChaosCounter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    ChaosObject[] chaosObjects;
+    public float Chaos;
+    private TMP_Text text;
+
+    void Awake() {
+        text = GetComponent<TMP_Text>();
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        chaosObjects = FindObjectsOfType<ChaosObject>();
+    }
+
     void Update()
     {
-        
+        Chaos = 0f;
+        foreach (var chaosObject in chaosObjects)
+        {
+            if (chaosObject.Settled) {
+                Chaos += chaosObject.PosChaos + chaosObject.RotChaos;
+            }     
+        }
+
+        text.text = "Chaos: " + Chaos.ToString("0.00");
+
     }
 }

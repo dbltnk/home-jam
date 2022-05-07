@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class ChaosObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public bool Settled;
+    public Vector3 InitialPosition;
+    public Vector3 InitialRotation;
+
+    public float PosChaos => (transform.position - InitialPosition).magnitude;
+    public float RotChaos => (transform.rotation.eulerAngles - InitialRotation).magnitude;
+
+    private Rigidbody _rigidbody;
+
+    void Awake() {
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (!Settled) {
+            if (_rigidbody.velocity.sqrMagnitude < 0.001f && _rigidbody.angularVelocity.sqrMagnitude < 0.001f) {
+                NoteInitialState();
+            }
+        }   
+    }
+
+    void NoteInitialState()
+    {
+        InitialPosition = transform.position;
+        InitialRotation = transform.rotation.eulerAngles;
+        Settled = true;
     }
 }
