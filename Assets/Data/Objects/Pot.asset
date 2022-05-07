@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GhostSnapRadius: 1
   SizeGainOnCarry: 0.1
-  MinSizeToPickup: 1
+  MinSizeToPickup: 0.75

@@ -46,7 +46,7 @@ public class JellyController : MonoBehaviour
         }
         
 
-        size = 1f;
+        size = 0.5f;
         foreach (Transform child in inventory)
         {
             float childSize = 0.5f;
@@ -57,6 +57,7 @@ public class JellyController : MonoBehaviour
             size+= child.GetComponent<ChaosObject>().ObjectType.SizeGainOnCarry;
         }
 
+        size = Mathf.Min(size, 3f);
         transform.localScale = new Vector3(size, size, size);
         float fov = Utils.MapIntoRange(size, 1f, 3f, 60f, 90f);
         Camera.fieldOfView = fov;
