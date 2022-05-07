@@ -1,0 +1,38 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.meta",
+				"*.prefab",
+				"*.unity",
+				"*.controller",
+				"*.anim",
+				"*.png",
+				"*.mat"
+			],
+			"folder_exclude_patterns":
+			[
+				"Library",
+				"Temp",
+				"ProjectSettings",
+				".idea",
+				"obj",
+				".cache",
+				".unsaved",
+				".user",
+				"cotf-fmod"
+			],
+			"path": "."
+		}
+	],
+	"settings":
+    {
+        "SublimeLinter.linters.yamllint.c":
+        [
+            "${project_path}/.yamllint"
+        ]
+    }
+}
+	
