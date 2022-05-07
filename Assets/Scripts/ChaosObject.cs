@@ -63,7 +63,7 @@ public class ChaosObject : MonoBehaviour
 
         if (HasBeenMoved && Settled && Ghost != null) Ghost.gameObject.SetActive(true);  
 
-        if (transform.position.y < 0f) {
+        if (transform.position.y < -2f) {
             transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
         }
                 

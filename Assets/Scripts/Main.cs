@@ -24,7 +24,7 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-        if (Inputs.Player.Restart.triggered)
+        if (Inputs.Player.Restart.triggered || LegacyInput.RestartTriggered)
         {
             SceneManager.LoadScene(MainLevel);
         }
