@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Sofa1
   m_EditorClassIdentifier: 
   GhostSnapRadius: 2
-  SizeGainOnCarry: 0.3
+  SizeGainOnCarry: 0.15
   MinSizeToPickup: 2.5

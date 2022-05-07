@@ -76,6 +76,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3507349227746239187, guid: ef24dac9795bb944387abd84d1536341,
+        type: 3}
+      propertyPath: AttractionForce
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: -3507349227746239187, guid: ef24dac9795bb944387abd84d1536341,
+        type: 3}
+      propertyPath: AttractionDistance
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2509847262769391819, guid: ef24dac9795bb944387abd84d1536341,
         type: 3}
       propertyPath: m_Mesh

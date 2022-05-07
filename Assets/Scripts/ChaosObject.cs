@@ -54,7 +54,7 @@ public class ChaosObject : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         trailRenderer = GetComponent<TrailRenderer>();
         Release();
-        Renderer = GetComponentInChildren<Renderer>();
+        Renderer = GetComponentInChildren<MeshRenderer>();
         jellyController = FindObjectOfType<JellyController>();
     }
 
@@ -174,7 +174,7 @@ public class ChaosObject : MonoBehaviour
 
     public void Randomize()
     {
-        transform.position += Random.insideUnitSphere + new Vector3(0f, 1.5f, 0f);
+        transform.position += Random.insideUnitSphere * 4f + new Vector3(0f, 1.5f, 0f);
         transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 360f);
     }
 

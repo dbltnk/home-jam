@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shelf
   m_EditorClassIdentifier: 
   GhostSnapRadius: 2
-  SizeGainOnCarry: 0.2
+  SizeGainOnCarry: 0.15
   MinSizeToPickup: 2.5

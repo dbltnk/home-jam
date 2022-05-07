@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Column
   m_EditorClassIdentifier: 
   GhostSnapRadius: 1
-  SizeGainOnCarry: 0.15
+  SizeGainOnCarry: 0.1
   MinSizeToPickup: 1.5
