@@ -17,6 +17,7 @@ public class JellyCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Inputs == null) return;
         var rotate = Inputs.Player.Move.ReadValue<Vector2>();
         var rotDelta = rotate.x * RotationSpeed * Time.deltaTime;
         transform.Rotate(0f, rotDelta, 0f, Space.World);
