@@ -1,15 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GhostObject : MonoBehaviour
 {
-    public GameObject Original;
+    public static readonly List<GhostObject> ActiveObjects = new List<GhostObject>();
+    
+    public ObjectType ObjectType;
 
     [SerializeField] private MeshFilter Mesh;
 
-    public void TakeShape(GameObject go)
+    private void OnEnable()
+    {
+        ActiveObjects.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        ActiveObjects.Remove(this);
+    }
+    
+    public void TakeShape(GameObject go, ObjectType objectType)
     {
         var mesh = go.GetComponentInChildren<MeshFilter>();
         Mesh.sharedMesh = mesh.sharedMesh;
-        Original = go;
+        ObjectType = objectType;
     }
 }

@@ -28,7 +28,6 @@ public class ChaosObject : MonoBehaviour
     
     public float PosChaos => HasFoundInitial ? (transform.position - InitialPosition).magnitude : 0f;
     public float RotChaos => HasFoundInitial ? (transform.rotation.eulerAngles - InitialRotation).magnitude : 0f;
-    public bool Settled => CurrentState == State.SETTLED;
     public bool Carried => CurrentState == State.CARRIED;
 
     public float TimeStampLastReleased;
@@ -37,6 +36,7 @@ public class ChaosObject : MonoBehaviour
     public bool CanBePickedUp => Time.time - TimeStampLastReleased > PickupTimeoutAfterRelease; //CurrentState == State.SETTLED;
 
     public bool HasBeenMoved => PosChaos >= 1f || RotChaos >= 1f;
+    public bool Settled => CurrentState == State.SETTLED;
 
     private Rigidbody _rigidbody;
     private GhostObject Ghost;
@@ -56,7 +56,7 @@ public class ChaosObject : MonoBehaviour
         ActiveObjects.Remove(this);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (CurrentState == State.WAITING_TO_SETTLE && Time.time - WaitingToSettleStartTime > MinToBeforeSettle) {
             if (_rigidbody.velocity.sqrMagnitude < 0.001f && _rigidbody.angularVelocity.sqrMagnitude < 0.001f) {
@@ -64,43 +64,52 @@ public class ChaosObject : MonoBehaviour
             }
         }
 
-        if (HasBeenMoved && Settled && Ghost != null) Ghost.gameObject.SetActive(true);  
-
         if (transform.position.y < -2f) {
             transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
         }
-                
+
+        if (Ghost == null)
+        {
+            if (CurrentState == State.WAITING_TO_SETTLE || CurrentState == State.SETTLED)
+            {
+                TryToSnapToNearbyGhost();
+            }
+        }
+        else
+        {
+            ResetToGhost();
+        }
     }
 
     void Settle()
     {
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.ResetInertiaTensor();
+        
         if (!HasFoundInitial)
         {
             HasFoundInitial = true;
             InitialPosition = transform.position;
             InitialRotation = transform.rotation.eulerAngles;
-            if (CanSpawnGhost)
-            {
-                SpawnGhost();
-            }
         }
         CurrentState = State.SETTLED;
-
-        transform.position += UnityEngine.Random.insideUnitSphere + new Vector3(0f, 1.5f, 0f);
-        transform.rotation = Quaternion.Euler(UnityEngine.Random.insideUnitSphere * 360f);
     }
 
-    private void SpawnGhost()
+    public void SpawnGhost()
     {
         var go = Instantiate(Assets.GhostPrefab, transform.position, transform.rotation);
-        Ghost = go.GetComponent<GhostObject>();
-        Ghost.TakeShape(gameObject);
-        go.SetActive(false);
+        var ghost = go.GetComponent<GhostObject>();
+        ghost.TakeShape(gameObject, ObjectType);
     }
 
     public void PickUp()
     {
         CurrentState = State.CARRIED;
+        if (Ghost != null)
+        {
+            Ghost.gameObject.SetActive(true);
+            Ghost = null; 
+        }
     }
 
     public void Release()
@@ -108,5 +117,46 @@ public class ChaosObject : MonoBehaviour
         CurrentState = State.WAITING_TO_SETTLE;
         WaitingToSettleStartTime = Time.time;
         TimeStampLastReleased = Time.time;
+    }
+
+    public void TryToSnapToNearbyGhost()
+    {
+        var pos = transform.position;
+        
+        foreach (var it in GhostObject.ActiveObjects)
+        {
+            if (it.ObjectType == ObjectType &&
+                Vector3.Distance(pos, it.transform.position) < it.ObjectType.GhostSnapRadius)
+            {
+                Ghost = it;
+                Ghost.gameObject.SetActive(false);
+                Settle();
+                ResetToGhost();
+                break;
+            }
+        }
+    }
+
+    private void ResetToGhost()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.ResetInertiaTensor();
+        transform.position = Ghost.transform.position;
+        transform.rotation = Ghost.transform.rotation;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (ObjectType != null)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(transform.position, ObjectType.GhostSnapRadius);
+        }
+    }
+
+    public void Randomize()
+    {
+        transform.position += Random.insideUnitSphere + new Vector3(0f, 1.5f, 0f);
+        transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 360f);
     }
 }

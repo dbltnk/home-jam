@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e610c976f64249aeca13a0bd5f83af, type: 3}
   m_Name: Column
   m_EditorClassIdentifier: 
-  GhostSnapRadius: 0
+  GhostSnapRadius: 1
   SizeGainOnCarry: 0.15
   MinSizeToPickup: 1.5
