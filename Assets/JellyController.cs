@@ -76,8 +76,11 @@ public class JellyController : MonoBehaviour
 
         if (Inputs.Player.Release.triggered)
         {
-            foreach (Transform child in inventory)
-            {
+            // get the inventory child count    
+            var count = inventory.childCount;
+            if (count > 0) {
+                // get the first child of the inventory
+                Transform child = inventory.GetChild(0);
                 ReleaseObject(child.gameObject);
             }
         }
@@ -122,6 +125,10 @@ public class JellyController : MonoBehaviour
         go.GetComponent<Collider>().enabled = true;
         go.transform.SetParent(null);
         go.transform.localScale = Vector3.one;
+        // add a force in the camera direction
+        go.transform.position = transform.position + new Vector3(0f, 1.25f, 0f);
+        var forceDir = Camera.transform.forward.normalized * 1000f;
+        go.GetComponent<Rigidbody>().AddForce(forceDir);
     }
     
     private void OnCollisionEnter(Collision collision)
