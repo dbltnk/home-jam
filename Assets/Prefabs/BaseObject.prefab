@@ -51,6 +51,9 @@ MonoBehaviour:
   Assets: {fileID: 11400000, guid: 369efb5809d525746a27f98a11d57f71, type: 2}
   CanSpawnGhost: 1
   ObjectType: {fileID: 0}
+  Renderer: {fileID: 0}
+  BlinkScale: 8
+  BlinkColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
   TimeStampLastReleased: 0
   PickupTimeoutAfterRelease: 1
 --- !u!54 &7443867922456266356

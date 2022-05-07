@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Color = UnityEngine.Color;
 
 public class ChaosObject : MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class ChaosObject : MonoBehaviour
     [SerializeField] private Assets Assets;
     [SerializeField] private bool CanSpawnGhost;
     [SerializeField] public ObjectType ObjectType;
-
+    [SerializeField] public Renderer Renderer;
+    [SerializeField] private float BlinkScale = 10f;
+    [SerializeField] private Color BlinkColor = Color.black;
+    
     private bool HasFoundInitial;
     private Vector3 InitialPosition;
     private Vector3 InitialRotation;
@@ -40,10 +44,14 @@ public class ChaosObject : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private GhostObject Ghost;
-
+    private JellyController jellyController;
+    private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
+    
     void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
         Release();
+        Renderer = GetComponentInChildren<Renderer>();
+        jellyController = FindObjectOfType<JellyController>();
     }
 
     private void OnEnable()
@@ -79,6 +87,11 @@ public class ChaosObject : MonoBehaviour
         {
             ResetToGhost();
         }
+
+        var blinking = CanBePickedUpBy(jellyController.Size);
+        var f = Utils.MapIntoRange(Mathf.Sin(Time.time * BlinkScale), -1f, 1f, 0f, 1f);
+        var color = blinking ? Color.Lerp(Color.white, BlinkColor, f) : Color.white;
+        Renderer.material.SetColor(BaseColor, color);
     }
 
     void Settle()
@@ -158,5 +171,10 @@ public class ChaosObject : MonoBehaviour
     {
         transform.position += Random.insideUnitSphere + new Vector3(0f, 1.5f, 0f);
         transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 360f);
+    }
+
+    public bool CanBePickedUpBy(float size)
+    {
+        return CanBePickedUp && ObjectType.MinSizeToPickup <= size;
     }
 }

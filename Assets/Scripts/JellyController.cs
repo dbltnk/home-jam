@@ -19,6 +19,7 @@ public class JellyController : MonoBehaviour
     private MeshRenderer[] meshRenderers;
 
     [SerializeField] private float size;
+    public float Size => size;
         
     private void Awake()
     {
@@ -137,7 +138,7 @@ public class JellyController : MonoBehaviour
     {
         GameObject go = collision.gameObject;
         ChaosObject co = go.GetComponent<ChaosObject>(); 
-        if (co != null && co.CanBePickedUp && co.ObjectType.MinSizeToPickup <= size) {
+        if (co != null && co.CanBePickedUpBy(size)) {
             CaptureObject(go);
         }
     }
