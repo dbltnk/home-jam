@@ -47,8 +47,12 @@ public class ChaosObject : MonoBehaviour
     private JellyController jellyController;
     private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
     
+    TrailRenderer trailRenderer;
+
+
     void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
+        trailRenderer = GetComponent<TrailRenderer>();
         Release();
         Renderer = GetComponentInChildren<Renderer>();
         jellyController = FindObjectOfType<JellyController>();
@@ -92,6 +96,7 @@ public class ChaosObject : MonoBehaviour
         var f = Utils.MapIntoRange(Mathf.Sin(Time.time * BlinkScale), -1f, 1f, 0f, 1f);
         var color = blinking ? Color.Lerp(Color.white, BlinkColor, f) : Color.white;
         Renderer.material.SetColor(BaseColor, color);
+        trailRenderer.enabled = !Carried;
     }
 
     void Settle()

@@ -16,7 +16,7 @@ public class JellyController : MonoBehaviour
     private Transform inventory;
     private float inventoryCount => inventory.childCount;
 
-    private MeshRenderer[] meshRenderers;
+    private CanBecomeInvis[] objectsToPotentiallyHide;
 
     [SerializeField] private float size;
     public float Size => size;
@@ -28,24 +28,23 @@ public class JellyController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         inventory = transform.Find("Inventory");
         // find all meshrenderers in the scene
-        meshRenderers = FindObjectsOfType<MeshRenderer>();
+        objectsToPotentiallyHide = FindObjectsOfType<CanBecomeInvis>();
     }
     private void Update()
-    {
-        foreach (var meshRenderer in meshRenderers) {
-            meshRenderer.enabled = true;
+    {   
+        foreach (var o in objectsToPotentiallyHide) {
+            o.GetComponentInChildren<MeshRenderer>().enabled = true;
         }
 
         // cast a ray from the camera to the transform
-        Ray ray = new Ray(Camera.transform.position, transform.position - Camera.transform.position);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            CanBecomeInvis c = hit.collider.GetComponent<CanBecomeInvis>();
-            Renderer r = hit.collider.GetComponent<Renderer>();
-            if (c != null && r != null) r.enabled = false;
-        }
-        
+        RaycastHit[] hits = Physics.RaycastAll(Camera.transform.position, transform.position - Camera.transform.position, (transform.position - Camera.transform.position).magnitude);
+        //Ray ray = new Ray(Camera.transform.position, transform.position - Camera.transform.position);
+        //RaycastHit hit;
+        foreach (var hit in hits) {
+           CanBecomeInvis c = hit.collider.GetComponentInChildren<CanBecomeInvis>();
+           Renderer r = hit.collider.GetComponentInChildren<MeshRenderer>();
+           if (c != null && r != null) r.enabled = false;
+        }      
 
         size = 0.5f;
         foreach (Transform child in inventory)
