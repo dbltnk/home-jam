@@ -80,6 +80,14 @@ public class ChaosObject : MonoBehaviour
             transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
         }
 
+        if (transform.position.x < -8f || transform.position.x > 18f) {
+            transform.position = new Vector3(5f, 1.5f, -19f);
+        }
+
+        if (transform.position.z < -26f || transform.position.z > 8f) {
+            transform.position = new Vector3(5f, 1.5f, -19f);
+        }
+
         if (Ghost == null)
         {
             if (CurrentState == State.WAITING_TO_SETTLE || CurrentState == State.SETTLED)
