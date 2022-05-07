@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JellyCube
-  m_Shader: {fileID: -6465566751694194690, guid: 4dcb0fda8eeac35419d9aca3a5ae2662,
+  m_Shader: {fileID: -6465566751694194690, guid: dc72acb3cdf1c31449d2f13b21a53909,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -51,6 +51,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -126,12 +130,14 @@ Material:
     - _Surface: 1
     - _UVSec: 0
     - _UseUIAlphaClip: 0
+    - _WindQuality: 0
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 0.41411528, g: 0.6459927, b: 0.8867924, a: 0.8235294}
     - _Color: {r: 0.41411525, g: 0.6459927, b: 0.8867924, a: 0.8235294}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
