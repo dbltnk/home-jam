@@ -57,20 +57,20 @@ public class JellyController : MonoBehaviour
             child.position = child.position + Random.insideUnitSphere * 0.01f;
         }
         
-        if (Inputs.Player.Jump.IsPressed())
+        if (Inputs.Player.Jump.IsPressed() || LegacyInput.JumpPressed)
         {
             Charge += ChargePerSecond * Time.deltaTime;
             Charge = Mathf.Clamp(Charge, 0f, 1f);
         }
         
-        if (Inputs.Player.Jump.WasReleasedThisFrame())
+        if (Inputs.Player.Jump.WasReleasedThisFrame() || LegacyInput.JumpWasReleasedThisFrame)
         {
             var forceDir = CalcMoveDirection().normalized * Charge * Force;
             Rigidbody.AddForceAtPosition(forceDir, transform.position);
             Charge = 0f;
         }
 
-        if (Inputs.Player.Release.triggered)
+        if (Inputs.Player.Release.triggered || LegacyInput.ReleaseTriggered)
         {
             // get the inventory child count    
             var count = inventory.childCount;
