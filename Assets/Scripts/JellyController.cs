@@ -17,6 +17,8 @@ public class JellyController : MonoBehaviour
     private float inventoryCount => inventory.childCount;
 
     private MeshRenderer[] meshRenderers;
+
+    [SerializeField] private float size;
         
     private void Awake()
     {
@@ -29,12 +31,6 @@ public class JellyController : MonoBehaviour
     }
     private void Update()
     {
-        float size = Mathf.Min(1f + 0.05f * inventoryCount, 3f);
-        transform.localScale = new Vector3(size, size, size);
-
-        float fov = Utils.MapIntoRange(size, 1f, 3f, 60f, 90f);
-        Camera.fieldOfView = fov;
-
         foreach (var meshRenderer in meshRenderers) {
             meshRenderer.enabled = true;
         }
@@ -49,13 +45,21 @@ public class JellyController : MonoBehaviour
             if (c != null && r != null) r.enabled = false;
         }
         
+
+        size = 1f;
         foreach (Transform child in inventory)
         {
             float childSize = 0.5f;
             child.localScale = new Vector3(childSize, childSize, childSize);
             // Move each child to a slightly randomized position
             child.position = child.position + Random.insideUnitSphere * 0.01f;
+
+            size+= child.GetComponent<ChaosObject>().ObjectType.SizeGainOnCarry;
         }
+
+        transform.localScale = new Vector3(size, size, size);
+        float fov = Utils.MapIntoRange(size, 1f, 3f, 60f, 90f);
+        Camera.fieldOfView = fov;
         
         if (Inputs.Player.Jump.IsPressed() || LegacyInput.JumpPressed)
         {
@@ -131,7 +135,7 @@ public class JellyController : MonoBehaviour
     {
         GameObject go = collision.gameObject;
         ChaosObject co = go.GetComponent<ChaosObject>(); 
-        if (co != null && co.CanBePickedUp) {
+        if (co != null && co.CanBePickedUp && co.ObjectType.MinSizeToPickup <= size) {
             CaptureObject(go);
         }
     }

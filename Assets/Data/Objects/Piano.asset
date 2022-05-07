@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e610c976f64249aeca13a0bd5f83af, type: 3}
   m_Name: Piano
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 0}
+  GhostSnapRadius: 0
+  SizeGainOnCarry: 0.3
+  MinSizeToPickup: 2.5

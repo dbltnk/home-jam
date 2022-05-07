@@ -8,7 +8,7 @@ public class ChaosObject : MonoBehaviour
     [SerializeField] private float MinToBeforeSettle = 1f;
     [SerializeField] private Assets Assets;
     [SerializeField] private bool CanSpawnGhost;
-    [SerializeField] private ObjectType ObjectType;
+    [SerializeField] public ObjectType ObjectType;
 
     private bool HasFoundInitial;
     private Vector3 InitialPosition;
