@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class StartZone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public bool PlayerIsInStartZone;
+
+    void OnTriggerEnter(Collider other)
+     {
+        if (other.gameObject.GetComponent<JellyController>() != null) {
+            PlayerIsInStartZone = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.GetComponent<JellyController>() != null) {
+            PlayerIsInStartZone = false;
+        }
     }
 }
