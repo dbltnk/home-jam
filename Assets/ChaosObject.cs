@@ -20,6 +20,8 @@ public class ChaosObject : MonoBehaviour
     public float PosChaos => HasFoundInitial ? (transform.position - InitialPosition).magnitude : 0f;
     public float RotChaos => HasFoundInitial ? (transform.rotation.eulerAngles - InitialRotation).magnitude : 0f;
     public bool Settled => CurrentState == State.SETTLED;
+    public bool Carried => CurrentState == State.CARRIED;
+
     public bool CanBePickedUp => CurrentState == State.SETTLED;
 
     private Rigidbody _rigidbody;

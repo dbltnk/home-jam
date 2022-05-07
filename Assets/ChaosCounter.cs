@@ -23,7 +23,7 @@ public class ChaosCounter : MonoBehaviour
         Chaos = 0f;
         foreach (var chaosObject in chaosObjects)
         {
-            if (chaosObject.Settled) {
+            if (chaosObject.HasFoundInitial) {
                 Chaos += chaosObject.PosChaos;// + chaosObject.RotChaos;
             }     
         }
