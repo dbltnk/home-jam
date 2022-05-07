@@ -29,6 +29,8 @@ public class ChaosObject : MonoBehaviour
 
     public bool CanBePickedUp => CurrentState == State.SETTLED;
 
+    public bool HasBeenMoved => PosChaos >= 1f || RotChaos >= 1f;
+
     private Rigidbody _rigidbody;
     private GhostObject Ghost;
 
@@ -43,7 +45,9 @@ public class ChaosObject : MonoBehaviour
             if (_rigidbody.velocity.sqrMagnitude < 0.001f && _rigidbody.angularVelocity.sqrMagnitude < 0.001f) {
                 Settle();
             }
-        }   
+        }
+
+        if (HasBeenMoved && Settled && Ghost != null) Ghost.gameObject.SetActive(true);  
     }
 
     void Settle()
@@ -72,10 +76,10 @@ public class ChaosObject : MonoBehaviour
     public void PickUp()
     {
         CurrentState = State.CARRIED;
-        if (Ghost != null)
-        {
-            Ghost.gameObject.SetActive(true);    
-        }
+        //if (Ghost != null)
+        //{
+        //    Ghost.gameObject.SetActive(true);    
+        //}
     }
 
     public void Release()
