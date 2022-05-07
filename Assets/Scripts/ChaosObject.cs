@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ChaosObject : MonoBehaviour
 {
+    public static readonly List<ChaosObject> ActiveObjects = new List<ChaosObject>(); 
+    
     [SerializeField] private float MinToBeforeSettle = 1f;
     [SerializeField] private Assets Assets;
     [SerializeField] private bool CanSpawnGhost;
@@ -37,6 +41,16 @@ public class ChaosObject : MonoBehaviour
     void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
         Release();
+    }
+
+    private void OnEnable()
+    {
+        ActiveObjects.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        ActiveObjects.Remove(this);
     }
 
     void Update()
