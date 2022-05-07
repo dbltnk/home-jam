@@ -62,6 +62,11 @@ public class ChaosObject : MonoBehaviour
         }
 
         if (HasBeenMoved && Settled && Ghost != null) Ghost.gameObject.SetActive(true);  
+
+        if (transform.position.y < 0f) {
+            transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
+        }
+                
     }
 
     void Settle()
@@ -77,6 +82,9 @@ public class ChaosObject : MonoBehaviour
             }
         }
         CurrentState = State.SETTLED;
+
+        transform.position += UnityEngine.Random.insideUnitSphere + new Vector3(0f, 1.5f, 0f);
+        transform.rotation = Quaternion.Euler(UnityEngine.Random.insideUnitSphere * 360f);
     }
 
     private void SpawnGhost()

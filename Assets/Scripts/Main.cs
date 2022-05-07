@@ -29,10 +29,10 @@ public class Main : MonoBehaviour
             SceneManager.LoadScene(MainLevel);
         }
 
-        if (start.PlayerIsInStartZone && drop.ObjectHasBeenDelivered)
-        {
-            WinText.SetActive(true);
-        }
+        //if (start.PlayerIsInStartZone && drop.ObjectHasBeenDelivered)
+        //{
+        //    WinText.SetActive(true);
+        //}
     }
 
 }
