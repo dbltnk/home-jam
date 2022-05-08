@@ -22,6 +22,8 @@ public class JellyController : MonoBehaviour
     public GameObject DecalSlime;
 
     private AudioSource audioSource;
+
+    private int selectedItemIndex = 0;
         
     private void Awake()
     {
@@ -81,14 +83,35 @@ public class JellyController : MonoBehaviour
             Audio.PlayAt("jump", transform.position);
         }
 
+        // on mouse wheel up increase selected item index
+        if (LegacyInput.MouseWheelUp) selectedItemIndex++;
+        if (LegacyInput.MouseWheelDown) selectedItemIndex--;
+        // loop the selected item index as an int
+        selectedItemIndex = (int)Mathf.Repeat(selectedItemIndex, inventoryCount);      
+        
+        GameObject selectedInventoryItem = null;
+        var count = inventory.childCount;
+        if (count > 0) {
+            // get the first child of the inventory
+            selectedInventoryItem = inventory.GetChild(selectedItemIndex).gameObject;
+            
+        }
+
+        if (selectedInventoryItem != null)  {
+            string rawName = selectedInventoryItem.name;
+            // take rawname and remove everything after the space or after a bracket
+            string actualName = rawName.Split('(')[0].Trim();
+            //string actualName = rawName.Substring(0, rawName.IndexOf(" "));
+            JellyUI.Instance.SetSelectedText(actualName);
+            }
+        else {
+            JellyUI.Instance.SetSelectedText("");
+        } 
+
         if (Inputs.Player.Release.triggered || LegacyInput.ReleaseTriggered)
         {
-            // get the inventory child count    
-            var count = inventory.childCount;
-            if (count > 0) {
-                // get the first child of the inventory
-                Transform child = inventory.GetChild(count-1);
-                ReleaseObject(child.gameObject);
+            if (selectedInventoryItem != null) {
+                ReleaseObject(selectedInventoryItem);
             }
         }
         
