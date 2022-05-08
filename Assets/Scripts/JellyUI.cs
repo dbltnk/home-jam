@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class JellyUI : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class JellyUI : MonoBehaviour
     }
 
     [SerializeField] private Image ChargeImage;
+    [SerializeField] private TMP_Text SelectedText;
+
 
     public float Charge
     {
@@ -25,5 +28,10 @@ public class JellyUI : MonoBehaviour
             scale.x = value;
             ChargeImage.transform.localScale = scale;
         }
+    }
+
+    public void SetSelectedText(string text)
+    {
+        SelectedText.text = text;
     }
 }
