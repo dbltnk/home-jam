@@ -65,6 +65,7 @@ public class Audio : MonoBehaviour
             var source =go.AddComponent<AudioSource>(); 
             source.clip = clip;
             source.outputAudioMixerGroup = ImportMixerGroup;
+            source.playOnAwake = false;
         }
     }
     #endif
