@@ -85,7 +85,7 @@ public class JellyController : MonoBehaviour
         float fov = Utils.MapIntoRange(size, 1f, 3f, 60f, 90f);
         Camera.fieldOfView = fov;
         
-        print(size);
+        // print(size);
 
         if (Inputs.Player.Jump.IsPressed() || LegacyInput.JumpPressed)
         {
@@ -119,13 +119,15 @@ public class JellyController : MonoBehaviour
             
         }
 
+        JellyUI.Instance.SetSize(Size);
+        
         if (selectedInventoryItem != null)  {
             string rawName = selectedInventoryItem.name;
             // take rawname and remove everything after the space or after a bracket
             string actualName = rawName.Split('(')[0].Trim();
             //string actualName = rawName.Substring(0, rawName.IndexOf(" "));
             JellyUI.Instance.SetSelectedText(actualName);
-            }
+        }
         else {
             JellyUI.Instance.SetSelectedText("");
         } 
@@ -151,7 +153,7 @@ public class JellyController : MonoBehaviour
         var dir = (dirx + diry).normalized;
         var forward = Camera.transform.forward;
         var f = move.magnitude;
-        dir = Vector3.Lerp(forward, dir, f);
+        dir = Vector3.Lerp(forward, dir, 0f);
         var dirOnPlane = Vector3.ProjectOnPlane(dir, Vector3.up).normalized;
         var dirMove = (dirOnPlane + Vector3.up * ForceUpwards).normalized;
         return dirMove;
