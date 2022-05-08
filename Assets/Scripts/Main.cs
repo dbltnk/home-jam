@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
@@ -26,6 +27,17 @@ public class Main : MonoBehaviour
         {
             SceneManager.LoadScene(MainLevel);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0)) Load(0);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) Load(1);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) Load(2);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) Load(3);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) Load(4);
+    }
+
+    private void Load(int levelIdx)
+    {
+        SceneManager.LoadScene($"Scenes/Level{levelIdx}");
     }
 
     IEnumerator Start()
@@ -44,5 +56,4 @@ public class Main : MonoBehaviour
         JellyController.enabled = true;
         JellyCamera.enabled = true;
     }
-
 }
