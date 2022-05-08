@@ -20,6 +20,8 @@ public class JellyController : MonoBehaviour
     
     public float Size => size;
     public GameObject DecalSlime;
+
+    private AudioSource audioSource;
         
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class JellyController : MonoBehaviour
         Inputs.Enable();
         Rigidbody = GetComponent<Rigidbody>();
         inventory = transform.Find("Inventory");
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {   
@@ -64,6 +67,10 @@ public class JellyController : MonoBehaviour
         {
             Charge += ChargePerSecond * Time.deltaTime;
             Charge = Mathf.Clamp(Charge, 0f, 1f);
+            audioSource.enabled = true;
+        }
+        else {
+            audioSource.enabled = false;
         }
         
         if (Inputs.Player.Jump.WasReleasedThisFrame() || LegacyInput.JumpWasReleasedThisFrame)
@@ -71,6 +78,7 @@ public class JellyController : MonoBehaviour
             var forceDir = CalcMoveDirection().normalized * Charge * Force;
             Rigidbody.AddForceAtPosition(forceDir, transform.position);
             Charge = 0f;
+            Audio.PlayAt("jump", transform.position);
         }
 
         if (Inputs.Player.Release.triggered || LegacyInput.ReleaseTriggered)
