@@ -162,6 +162,7 @@ public class JellyController : MonoBehaviour
             // rotate the decal around the y axis randomly
             decal.transform.Rotate(0f, Random.Range(0f, 360f), 0f);
             decal.transform.parent = go.transform;
+            Audio.Instance.PlayAt("slime", transform.position);
         }
     }
 }
