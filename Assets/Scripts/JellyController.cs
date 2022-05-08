@@ -19,6 +19,7 @@ public class JellyController : MonoBehaviour
     private CanBecomeInvis[] objectsToPotentiallyHide;
 
     [SerializeField] private float size;
+    
     public float Size => size;
         
     private void Awake()
@@ -98,6 +99,9 @@ public class JellyController : MonoBehaviour
         var dirx = Vector3.Lerp(-Camera.transform.right, Camera.transform.right, fx);
         var diry = Vector3.Lerp(-Camera.transform.forward, Camera.transform.forward, fy);
         var dir = (dirx + diry).normalized;
+        var forward = Camera.transform.forward;
+        var f = move.magnitude;
+        dir = Vector3.Lerp(forward, dir, f);
         var dirOnPlane = Vector3.ProjectOnPlane(dir, Vector3.up).normalized;
         var dirMove = (dirOnPlane + Vector3.up * ForceUpwards).normalized;
         return dirMove;
