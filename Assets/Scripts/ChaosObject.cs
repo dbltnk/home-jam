@@ -145,6 +145,13 @@ public class ChaosObject : MonoBehaviour
         CurrentState = State.WAITING_TO_SETTLE;
         WaitingToSettleStartTime = Time.time;
         TimeStampLastReleased = Time.time;
+        //Renderer rend = go.transform.GetChild(0).GetComponent<MeshRenderer>();
+        if (Renderer != null) {
+            Renderer.material.shader = Shader.Find("Universal Render Pipeline/Lit");
+            Renderer.material.SetColor("_EmissionColor", new Color(0f, 0.184f, 0.177f, 1f));
+            Renderer.material.EnableKeyword("_EMISSION");
+            Renderer.material.SetFloat("_Smoothness", 0.75f);
+        }
     }
 
     public void TryToSnapToNearbyGhost()
