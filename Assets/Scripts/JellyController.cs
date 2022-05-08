@@ -21,6 +21,7 @@ public class JellyController : MonoBehaviour
     [SerializeField] private float size;
     
     public float Size => size;
+    public GameObject DecalSlime;
         
     private void Awake()
     {
@@ -143,6 +144,24 @@ public class JellyController : MonoBehaviour
         ChaosObject co = go.GetComponent<ChaosObject>(); 
         if (co != null && co.CanBePickedUpBy(size)) {
             CaptureObject(go);
+        }
+
+        //Collider[] others = Physics.OverlapSphere(transform.position, size + 1f);
+        //foreach (var other in others) {
+        //    if (other.transform.CompareTag("slime")) return;
+        //}
+
+        if (go.GetComponentInChildren<CanBeSlimed>() != null) {
+            var p = collision.contacts[0];
+            var q = Quaternion.FromToRotation(Vector3.up, p.normal);
+            var decal = Instantiate(DecalSlime, p.point + p.normal.normalized * 0.01f, q);
+            // scale the decal to the size of the player
+            float s = Random.Range(0.5f, 1.25f);
+            decal.transform.localScale = transform.localScale + new Vector3(s, s, s);
+            if (go.GetComponentInChildren<ChaosObject>() != null) decal.transform.localScale /= 2f;
+            // rotate the decal around the y axis randomly
+            decal.transform.Rotate(0f, Random.Range(0f, 360f), 0f);
+            decal.transform.parent = go.transform;
         }
     }
 }

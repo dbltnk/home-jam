@@ -105,6 +105,8 @@ MonoBehaviour:
   Force: 1000
   ForceUpwards: 0.5
   size: 0
+  DecalSlime: {fileID: 1801041046286232142, guid: 61ce9cc3b41a800c99803314a9c61fee,
+    type: 3}
 --- !u!54 &5973463720666903711
 Rigidbody:
   m_ObjectHideFlags: 0
