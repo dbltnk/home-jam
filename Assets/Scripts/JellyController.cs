@@ -84,8 +84,8 @@ public class JellyController : MonoBehaviour
         }
 
         // on mouse wheel up increase selected item index
-        if (LegacyInput.MouseWheelUp) selectedItemIndex++;
-        if (LegacyInput.MouseWheelDown) selectedItemIndex--;
+        if (LegacyInput.MouseWheelUp || Inputs.Player.InventoryCycleLeft.triggered) selectedItemIndex++;
+        if (LegacyInput.MouseWheelDown || Inputs.Player.InventoryCycleRight.triggered) selectedItemIndex--;
         // loop the selected item index as an int
         selectedItemIndex = (int)Mathf.Repeat(selectedItemIndex, inventoryCount);      
         

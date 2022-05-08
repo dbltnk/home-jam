@@ -9,5 +9,4 @@ public static class LegacyInput
 
     public static bool MouseWheelUp => Input.mouseScrollDelta.y > 0;
     public static bool MouseWheelDown => Input.mouseScrollDelta.y < 0;
-
 }

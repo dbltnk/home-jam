@@ -37,15 +37,6 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""000e4127-76b3-4e24-aa49-fb7bb9e19537"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""1c3245c4-a108-4816-9201-117a43a86774"",
@@ -67,6 +58,24 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                     ""name"": ""Restart"",
                     ""type"": ""Button"",
                     ""id"": ""ad8a1c78-aaff-4b09-abc8-f575c63c3bfd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryCycleLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""00636300-69f2-41c5-9edf-19f334bb6241"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryCycleRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e3634558-8bf6-455e-8ef5-fb41a4c07714"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -208,39 +217,6 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e5f5442-8668-4b27-a940-df99bad7e831"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
                     ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
@@ -335,6 +311,61 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bffa66c9-d50c-4b1e-9b6c-22690088db19"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InventoryCycleLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec216b7b-3837-43c6-accf-4f01a7daa433"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InventoryCycleLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cbc6a1f-3107-47e9-a5eb-6acfb1dcee82"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InventoryCycleRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06d4b474-7f88-4c74-9848-22fe7214be20"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InventoryCycleRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78f817d3-bf45-4f18-a600-77c8507c3646"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InventoryCycleLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -923,10 +954,11 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Release = m_Player.FindAction("Release", throwIfNotFound: true);
         m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
+        m_Player_InventoryCycleLeft = m_Player.FindAction("InventoryCycleLeft", throwIfNotFound: true);
+        m_Player_InventoryCycleRight = m_Player.FindAction("InventoryCycleRight", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -999,19 +1031,21 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Release;
     private readonly InputAction m_Player_Restart;
+    private readonly InputAction m_Player_InventoryCycleLeft;
+    private readonly InputAction m_Player_InventoryCycleRight;
     public struct PlayerActions
     {
         private @JellyInputs m_Wrapper;
         public PlayerActions(@JellyInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Release => m_Wrapper.m_Player_Release;
         public InputAction @Restart => m_Wrapper.m_Player_Restart;
+        public InputAction @InventoryCycleLeft => m_Wrapper.m_Player_InventoryCycleLeft;
+        public InputAction @InventoryCycleRight => m_Wrapper.m_Player_InventoryCycleRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1024,9 +1058,6 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
@@ -1036,6 +1067,12 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                 @Restart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRestart;
                 @Restart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRestart;
                 @Restart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRestart;
+                @InventoryCycleLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryCycleLeft;
+                @InventoryCycleLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryCycleLeft;
+                @InventoryCycleLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryCycleLeft;
+                @InventoryCycleRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryCycleRight;
+                @InventoryCycleRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryCycleRight;
+                @InventoryCycleRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryCycleRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1043,9 +1080,6 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -1055,6 +1089,12 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
                 @Restart.started += instance.OnRestart;
                 @Restart.performed += instance.OnRestart;
                 @Restart.canceled += instance.OnRestart;
+                @InventoryCycleLeft.started += instance.OnInventoryCycleLeft;
+                @InventoryCycleLeft.performed += instance.OnInventoryCycleLeft;
+                @InventoryCycleLeft.canceled += instance.OnInventoryCycleLeft;
+                @InventoryCycleRight.started += instance.OnInventoryCycleRight;
+                @InventoryCycleRight.performed += instance.OnInventoryCycleRight;
+                @InventoryCycleRight.canceled += instance.OnInventoryCycleRight;
             }
         }
     }
@@ -1212,10 +1252,11 @@ public partial class @JellyInputs : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRelease(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
+        void OnInventoryCycleLeft(InputAction.CallbackContext context);
+        void OnInventoryCycleRight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
