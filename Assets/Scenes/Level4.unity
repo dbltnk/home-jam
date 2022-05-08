@@ -3472,10 +3472,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da16df4bf64278143bdb02a9092d389b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainLevel: Scenes/SampleScene
+  MainLevel: Scenes/Level4
   JellyController: {fileID: 1195367625}
   JellyCamera: {fileID: 963194229}
-  WinText: {fileID: 1470264069}
 --- !u!1001 &610963680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9194,12 +9193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 9105b5c8bfc0a884dbcb49ecc13acf11, type: 3}
   m_ActionId: 1596ad25-d1ee-4246-933d-a7912e164ad2
---- !u!1 &1470264069 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6925047902493993029, guid: ea771543c83f7dda4b03f7ce72030b16,
-    type: 3}
-  m_PrefabInstance: {fileID: 6925047901258619712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1487849738
 PrefabInstance:
   m_ObjectHideFlags: 0

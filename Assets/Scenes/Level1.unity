@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da16df4bf64278143bdb02a9092d389b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainLevel: Scenes/gamelevel
+  MainLevel: Scenes/Level1
   JellyController: {fileID: 1195367625}
   JellyCamera: {fileID: 0}
 --- !u!1 &705507993
