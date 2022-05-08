@@ -241,6 +241,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1110334793841731234, guid: ea771543c83f7dda4b03f7ce72030b16,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 14.700012
+      objectReference: {fileID: 0}
     - target: {fileID: 6925047901793684951, guid: ea771543c83f7dda4b03f7ce72030b16,
         type: 3}
       propertyPath: m_Name
@@ -596,6 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainLevel: Scenes/Level0
+  OverlayScene: Scenes/logo
   JellyController: {fileID: 1195367625}
   JellyCamera: {fileID: 963194229}
 --- !u!1001 &648072829
@@ -1095,7 +1101,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

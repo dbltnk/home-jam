@@ -37,4 +37,14 @@ public static class EditorSceneSwitcher {
 	{
 		EditorSceneManager.OpenScene("Assets/Scenes/Prefabs.unity");
 	}
+
+	[MenuItem("Scenes/All")]
+	static void OpenAll()
+	{
+		EditorSceneManager.OpenScene("Assets/Scenes/Level0.unity", OpenSceneMode.Single);
+		EditorSceneManager.OpenScene("Assets/Scenes/Level1.unity", OpenSceneMode.Additive);
+		EditorSceneManager.OpenScene("Assets/Scenes/Level2.unity", OpenSceneMode.Additive);
+		EditorSceneManager.OpenScene("Assets/Scenes/Level3.unity", OpenSceneMode.Additive);
+		EditorSceneManager.OpenScene("Assets/Scenes/Level4.unity", OpenSceneMode.Additive);
+	}
 }

@@ -494,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainLevel: Scenes/Level1
+  OverlayScene: Scenes/logo
   JellyController: {fileID: 1195367625}
   JellyCamera: {fileID: 0}
 --- !u!1 &705507993
@@ -1214,7 +1215,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

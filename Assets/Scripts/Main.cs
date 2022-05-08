@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
     [SerializeField] private string MainLevel = "Scenes/Level0";
+    [SerializeField] private string OverlayScene = "Scenes/Overlay";
     [SerializeField] private JellyController JellyController;
     [SerializeField] private JellyCamera JellyCamera;
 
@@ -20,7 +20,7 @@ public class Main : MonoBehaviour
         JellyCamera = FindObjectOfType<JellyCamera>();
         JellyController = FindObjectOfType<JellyController>();
     }
-
+    
     void Update()
     {
         if (Inputs.Player.Restart.triggered || LegacyInput.RestartTriggered)
@@ -42,6 +42,7 @@ public class Main : MonoBehaviour
 
     IEnumerator Start()
     {
+        //SceneManager.LoadScene(OverlayScene, LoadSceneMode.Additive);
         // disable inputs
         JellyController.enabled = false;
         JellyCamera.enabled = false;
