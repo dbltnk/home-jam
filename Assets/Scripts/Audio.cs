@@ -1,18 +1,16 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using Random = UnityEngine.Random;
+using UnityEngine.Audio;
 
 public class Audio : MonoBehaviour
 {
     public static Audio Instance;
 
     [SerializeField] private string ImportPath = "Audio";
+    [SerializeField] private AudioMixerGroup ImportMixerGroup;
 
     private void Awake()
     {
@@ -54,15 +52,18 @@ public class Audio : MonoBehaviour
         importRoot.transform.SetParent(transform);
         Debug.Log(Application.dataPath);
         var path = Path.Combine(Application.dataPath, ImportPath);
-        foreach (var it in Directory.GetFiles(path, "*.ogg", SearchOption.AllDirectories))
+        foreach (var it in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories))
         {
             var parts = it.Split("Assets", 2);
             var assetPath = "Assets/" + parts[1];
             AudioClip clip = (AudioClip)UnityEditor.AssetDatabase.LoadAssetAtPath(assetPath, typeof(AudioClip));
+            if (clip == null) continue;
             Debug.Log($"{it} {clip.name}");
             var go = new GameObject(clip.name);
             go.transform.SetParent(importRoot.transform);
-            go.AddComponent<AudioSource>().clip = clip;
+            var source =go.AddComponent<AudioSource>(); 
+            source.clip = clip;
+            source.outputAudioMixerGroup = ImportMixerGroup;
         }
     }
     #endif

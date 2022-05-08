@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: AttractionDistance
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: -3087791926506694995, guid: ef24dac9795bb944387abd84d1536341,
+        type: 3}
+      propertyPath: AudioName
+      value: impactBell
+      objectReference: {fileID: 0}
     - target: {fileID: 2509847262769391819, guid: ef24dac9795bb944387abd84d1536341,
         type: 3}
       propertyPath: m_Mesh
