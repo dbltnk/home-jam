@@ -6,4 +6,5 @@ public class ObjectType : ScriptableObject
     public float GhostSnapRadius;
     public float SizeGainOnCarry;
     public float MinSizeToPickup;
+    public float RandomizeRadius = 4f;
 }

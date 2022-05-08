@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Color = UnityEngine.Color;
 
 public class ChaosObject : MonoBehaviour
 {
@@ -180,10 +179,22 @@ public class ChaosObject : MonoBehaviour
         }
     }
 
-    public void Randomize()
+    public void Randomize(Bounds safeZone)
     {
-        transform.position += Random.insideUnitSphere * 4f + new Vector3(0f, 1.5f, 0f);
-        transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 360f);
+        for (int i = 0; i < 100; ++i)
+        {
+            var randomPos = Random.insideUnitSphere;
+            randomPos.y = 0f;
+            randomPos *= ObjectType.RandomizeRadius;
+            randomPos += transform.position + new Vector3(0f, 1.5f, 0f);
+            if (safeZone.Contains(randomPos))
+            {
+                transform.position = randomPos;
+                transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 360f);
+                return;
+            }
+        }
+        Debug.LogError("not able to randomize in safe zone", this);
     }
 
     public bool CanBePickedUpBy(float size)

@@ -14,15 +14,10 @@ public class Main : MonoBehaviour
 
     public GameObject WinText;
 
-    private StartZone start;
-    private DropZone drop;
-
     void Awake()
     {
         Inputs = new JellyInputs();
         Inputs.Enable();
-        start = FindObjectOfType<StartZone>();
-        drop = FindObjectOfType<DropZone>();
     }
 
     void Update()
@@ -31,11 +26,6 @@ public class Main : MonoBehaviour
         {
             SceneManager.LoadScene(MainLevel);
         }
-
-        //if (start.PlayerIsInStartZone && drop.ObjectHasBeenDelivered)
-        //{
-        //    WinText.SetActive(true);
-        //}
     }
 
     IEnumerator Start()
@@ -48,7 +38,8 @@ public class Main : MonoBehaviour
         // spawn ghost
         foreach (var it in ChaosObject.ActiveObjects) it.SpawnGhost();
         // randomize
-        foreach (var it in ChaosObject.ActiveObjects) it.Randomize();
+        var safeZone = FindObjectOfType<SafeZone>().Zone;
+        foreach (var it in ChaosObject.ActiveObjects) it.Randomize(safeZone);
         // play
         JellyController.enabled = true;
         JellyCamera.enabled = true;
