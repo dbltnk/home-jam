@@ -13538,6 +13538,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -665054252309692620, guid: 7d0d3120c4e305d4dbc1989c36211772,
+        type: 3}
+      propertyPath: ImportPath
+      value: Audio
+      objectReference: {fileID: 0}
     - target: {fileID: 1754464448345581061, guid: 7d0d3120c4e305d4dbc1989c36211772,
         type: 3}
       propertyPath: m_RootOrder
