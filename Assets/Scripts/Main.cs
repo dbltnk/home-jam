@@ -1,23 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    [SerializeField] private string MainLevel = "Scenes/SampleScene";
+    [SerializeField] private string MainLevel = "Scenes/Level0";
     [SerializeField] private JellyController JellyController;
     [SerializeField] private JellyCamera JellyCamera;
 
     private JellyInputs Inputs;
 
-    public GameObject WinText;
-
     void Awake()
     {
         Inputs = new JellyInputs();
         Inputs.Enable();
+
+        JellyCamera = FindObjectOfType<JellyCamera>();
+        JellyController = FindObjectOfType<JellyController>();
     }
 
     void Update()

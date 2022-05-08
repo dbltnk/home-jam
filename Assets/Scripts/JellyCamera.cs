@@ -8,6 +8,11 @@ public class JellyCamera : MonoBehaviour
     [SerializeField] private float RotationSpeed;
 
     private JellyInputs Inputs;
+
+    public void SetTarget(GameObject target)
+    {
+        Target = target;
+    }
     
     private void Awake()
     {

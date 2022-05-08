@@ -32,6 +32,9 @@ public class JellyController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         inventory = transform.Find("Inventory");
         audioSource = GetComponent<AudioSource>();
+        var jellyCam = FindObjectOfType<JellyCamera>();
+        jellyCam.SetTarget(gameObject);
+        Camera = jellyCam.GetComponent<Camera>();
     }
 
     private Vector3 UnScaleObject(GameObject o) {
