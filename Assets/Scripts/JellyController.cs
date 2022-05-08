@@ -33,6 +33,15 @@ public class JellyController : MonoBehaviour
         inventory = transform.Find("Inventory");
         audioSource = GetComponent<AudioSource>();
     }
+
+    private Vector3 UnScaleObject(GameObject o) {
+        Vector3 scaleTmp = o.transform.localScale;
+        scaleTmp.x /= o.transform.parent.localScale.x;
+        scaleTmp.y /= o.transform.parent.localScale.y;
+        scaleTmp.z /= o.transform.parent.localScale.z;
+        return scaleTmp;
+    }
+
     private void Update()
     {   
         foreach (var o in CanBecomeInvis.ActiveObjects)
@@ -52,12 +61,23 @@ public class JellyController : MonoBehaviour
         size = 0.5f;
         foreach (Transform child in inventory)
         {
-            float childSize = 0.5f;
-            child.localScale = new Vector3(childSize, childSize, childSize);
-            // Move each child to a slightly randomized position
-            child.position = child.position + Random.insideUnitSphere * 0.01f;
-
             size+= child.GetComponent<ChaosObject>().ObjectType.SizeGainOnCarry;
+        }
+        foreach (Transform child in inventory)
+        {
+            child.position = child.position + Random.insideUnitSphere * 0.01f;
+            float delta = size / 2f;
+            child.position = new Vector3(   
+                Mathf.Clamp(child.position.x, transform.position.x - delta, transform.position.x + delta),
+                Mathf.Clamp(child.position.y, transform.position.y - delta, transform.position.y + delta),
+                Mathf.Clamp(child.position.z, transform.position.z - delta, transform.position.z + delta)
+            );
+
+            child.localScale = Vector3.one / size;
+
+            if (child.GetComponent<ChaosObject>().ObjectType.MinSizeToPickup > size) {
+               ReleaseObject(child.gameObject);
+            }
         }
 
         size = Mathf.Min(size, 3f);
