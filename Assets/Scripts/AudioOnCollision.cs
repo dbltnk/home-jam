@@ -10,7 +10,7 @@ public class AudioOnCollision : MonoBehaviour
         var vel = collision.relativeVelocity.magnitude;
         if (vel > MinVelocity)
         {
-            Audio.Instance.PlayAt(AudioName, collision.transform.position);    
+            Audio.PlayAt(AudioName, collision.transform.position);    
         }
     }
 }

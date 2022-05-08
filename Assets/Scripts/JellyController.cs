@@ -16,8 +16,6 @@ public class JellyController : MonoBehaviour
     private Transform inventory;
     private float inventoryCount => inventory.childCount;
 
-    private CanBecomeInvis[] objectsToPotentiallyHide;
-
     [SerializeField] private float size;
     
     public float Size => size;
@@ -29,13 +27,12 @@ public class JellyController : MonoBehaviour
         Inputs.Enable();
         Rigidbody = GetComponent<Rigidbody>();
         inventory = transform.Find("Inventory");
-        // find all meshrenderers in the scene
-        objectsToPotentiallyHide = FindObjectsOfType<CanBecomeInvis>();
     }
     private void Update()
     {   
-        foreach (var o in objectsToPotentiallyHide) {
-            o.GetComponentInChildren<MeshRenderer>().enabled = true;
+        foreach (var o in CanBecomeInvis.ActiveObjects)
+        {
+            o.Show();
         }
 
         // cast a ray from the camera to the transform
@@ -43,9 +40,8 @@ public class JellyController : MonoBehaviour
         //Ray ray = new Ray(Camera.transform.position, transform.position - Camera.transform.position);
         //RaycastHit hit;
         foreach (var hit in hits) {
-           CanBecomeInvis c = hit.collider.GetComponentInChildren<CanBecomeInvis>();
-           Renderer r = hit.collider.GetComponentInChildren<MeshRenderer>();
-           if (c != null && r != null) r.enabled = false;
+           CanBecomeInvis c = hit.collider.GetComponentInParent<CanBecomeInvis>();
+           if (c != null) c.Hide();
         }      
 
         size = 0.5f;
@@ -162,7 +158,7 @@ public class JellyController : MonoBehaviour
             // rotate the decal around the y axis randomly
             decal.transform.Rotate(0f, Random.Range(0f, 360f), 0f);
             decal.transform.parent = go.transform;
-            Audio.Instance.PlayAt("slime", transform.position);
+            Audio.PlayAt("slime", transform.position);
         }
     }
 }

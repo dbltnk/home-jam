@@ -129,7 +129,7 @@ public class ChaosObject : MonoBehaviour
 
     public void PickUp()
     {
-        Audio.Instance.PlayAt("slime", transform.position);
+        Audio.PlayAt("slime", transform.position);
         
         CurrentState = State.CARRIED;
         if (Ghost != null)
@@ -141,7 +141,7 @@ public class ChaosObject : MonoBehaviour
 
     public void Release()
     {
-        Audio.Instance.PlayAt("slime", transform.position);
+        Audio.PlayAt("slime", transform.position);
         CurrentState = State.WAITING_TO_SETTLE;
         WaitingToSettleStartTime = Time.time;
         TimeStampLastReleased = Time.time;

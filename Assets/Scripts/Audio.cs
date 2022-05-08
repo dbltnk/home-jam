@@ -7,8 +7,8 @@ using UnityEngine.Audio;
 
 public class Audio : MonoBehaviour
 {
-    public static Audio Instance;
-
+    private static Audio Instance;
+    
     [SerializeField] private string ImportPath = "Audio";
     [SerializeField] private AudioMixerGroup ImportMixerGroup;
 
@@ -28,9 +28,10 @@ public class Audio : MonoBehaviour
         }
     }
     
-    public void PlayAt(string name, Vector3 pos)
+    public static void PlayAt(string name, Vector3 pos)
     {
-        var possibleNodes = EnumMatchingChildren(name).ToList();
+        if (Instance == null) return;
+        var possibleNodes = Instance.EnumMatchingChildren(name).ToList();
         if (possibleNodes.Count == 0) return;
         var group = Utils.PickRandom(possibleNodes);
         var readySources = group.GetComponentsInChildren<AudioSource>()

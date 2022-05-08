@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class CanBecomeInvis : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static readonly List<CanBecomeInvis> ActiveObjects = new List<CanBecomeInvis>();
+
+    private Renderer[] Renderers;
+    
+    private void OnEnable()
     {
-        
+        ActiveObjects.Add(this);
+        Renderers = GetComponentsInChildren<Renderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        ActiveObjects.Remove(this);
+    }
+
+    public void Hide()
+    {
+        foreach (var it in Renderers) it.enabled = false;
+    }
+    
+    public void Show()
+    {
+        foreach (var it in Renderers) it.enabled = true;
     }
 }
