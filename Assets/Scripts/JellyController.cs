@@ -124,7 +124,7 @@ public class JellyController : MonoBehaviour
         if (selectedInventoryItem != null)  {
             string rawName = selectedInventoryItem.name;
             // take rawname and remove everything after the space or after a bracket
-            string actualName = rawName.Split('(')[0].Trim();
+            string actualName = $"#{selectedItemIndex+1} selected: {rawName.Split('(')[0].Trim()}";
             //string actualName = rawName.Substring(0, rawName.IndexOf(" "));
             JellyUI.Instance.SetSelectedText(actualName);
         }
