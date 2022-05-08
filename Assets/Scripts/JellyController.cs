@@ -122,9 +122,9 @@ public class JellyController : MonoBehaviour
         JellyUI.Instance.SetSize(Size);
         
         if (selectedInventoryItem != null)  {
-            string rawName = selectedInventoryItem.name;
+            string rawName = selectedInventoryItem.GetComponent<ChaosObject>().ObjectType.PrettyName;
             // take rawname and remove everything after the space or after a bracket
-            string actualName = $"#{selectedItemIndex+1} selected: {rawName.Split('(')[0].Trim()}";
+            string actualName = $"#{selectedItemIndex+1} selected: {rawName}";//.Split('(')[0].Trim()}";
             //string actualName = rawName.Substring(0, rawName.IndexOf(" "));
             JellyUI.Instance.SetSelectedText(actualName);
         }
