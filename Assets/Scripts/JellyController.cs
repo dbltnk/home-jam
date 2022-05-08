@@ -63,6 +63,8 @@ public class JellyController : MonoBehaviour
         float fov = Utils.MapIntoRange(size, 1f, 3f, 60f, 90f);
         Camera.fieldOfView = fov;
         
+        print(size);
+
         if (Inputs.Player.Jump.IsPressed() || LegacyInput.JumpPressed)
         {
             Charge += ChargePerSecond * Time.deltaTime;
