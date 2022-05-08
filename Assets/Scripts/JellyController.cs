@@ -33,6 +33,15 @@ public class JellyController : MonoBehaviour
         inventory = transform.Find("Inventory");
         audioSource = GetComponent<AudioSource>();
     }
+
+    private Vector3 UnScaleObject(GameObject o) {
+        Vector3 scaleTmp = o.transform.localScale;
+        scaleTmp.x /= o.transform.parent.localScale.x;
+        scaleTmp.y /= o.transform.parent.localScale.y;
+        scaleTmp.z /= o.transform.parent.localScale.z;
+        return scaleTmp;
+    }
+
     private void Update()
     {   
         foreach (var o in CanBecomeInvis.ActiveObjects)
@@ -52,12 +61,23 @@ public class JellyController : MonoBehaviour
         size = 0.5f;
         foreach (Transform child in inventory)
         {
-            float childSize = 0.5f;
-            child.localScale = new Vector3(childSize, childSize, childSize);
-            // Move each child to a slightly randomized position
-            child.position = child.position + Random.insideUnitSphere * 0.01f;
-
             size+= child.GetComponent<ChaosObject>().ObjectType.SizeGainOnCarry;
+        }
+        foreach (Transform child in inventory)
+        {
+            child.position = child.position + Random.insideUnitSphere * 0.01f;
+            float delta = size / 2f;
+            child.position = new Vector3(   
+                Mathf.Clamp(child.position.x, transform.position.x - delta, transform.position.x + delta),
+                Mathf.Clamp(child.position.y, transform.position.y - delta, transform.position.y + delta),
+                Mathf.Clamp(child.position.z, transform.position.z - delta, transform.position.z + delta)
+            );
+
+            child.localScale = Vector3.one / size;
+
+            if (child.GetComponent<ChaosObject>().ObjectType.MinSizeToPickup > size) {
+               ReleaseObject(child.gameObject);
+            }
         }
 
         size = Mathf.Min(size, 3f);
@@ -65,7 +85,7 @@ public class JellyController : MonoBehaviour
         float fov = Utils.MapIntoRange(size, 1f, 3f, 60f, 90f);
         Camera.fieldOfView = fov;
         
-        print(size);
+        // print(size);
 
         if (Inputs.Player.Jump.IsPressed() || LegacyInput.JumpPressed)
         {
@@ -99,13 +119,15 @@ public class JellyController : MonoBehaviour
             
         }
 
+        JellyUI.Instance.SetSize(Size);
+        
         if (selectedInventoryItem != null)  {
-            string rawName = selectedInventoryItem.name;
+            string rawName = selectedInventoryItem.GetComponent<ChaosObject>().ObjectType.PrettyName;
             // take rawname and remove everything after the space or after a bracket
-            string actualName = rawName.Split('(')[0].Trim();
+            string actualName = $"#{selectedItemIndex+1} selected: {rawName}";//.Split('(')[0].Trim()}";
             //string actualName = rawName.Substring(0, rawName.IndexOf(" "));
             JellyUI.Instance.SetSelectedText(actualName);
-            }
+        }
         else {
             JellyUI.Instance.SetSelectedText("");
         } 
@@ -131,7 +153,7 @@ public class JellyController : MonoBehaviour
         var dir = (dirx + diry).normalized;
         var forward = Camera.transform.forward;
         var f = move.magnitude;
-        dir = Vector3.Lerp(forward, dir, f);
+        dir = Vector3.Lerp(forward, dir, 0f);
         var dirOnPlane = Vector3.ProjectOnPlane(dir, Vector3.up).normalized;
         var dirMove = (dirOnPlane + Vector3.up * ForceUpwards).normalized;
         return dirMove;

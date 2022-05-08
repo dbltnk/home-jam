@@ -15,3 +15,5 @@ MonoBehaviour:
   GhostSnapRadius: 1
   SizeGainOnCarry: 0.05
   MinSizeToPickup: 0.5
+  RandomizeRadius: 4
+  PrettyName: Pear d'Orange
