@@ -126,6 +126,11 @@ public class JellyController : MonoBehaviour
         go.GetComponent<Collider>().enabled = false;
         go.transform.parent = inventory;
         go.transform.position = inventory.position + Random.insideUnitSphere * transform.localScale.x * 0.5f;
+
+        foreach (var it in go.GetComponentsInChildren<DestroyOnPickup>())
+        {
+            Destroy(it.gameObject);
+        }
     }
 
     void ReleaseObject(GameObject go)
