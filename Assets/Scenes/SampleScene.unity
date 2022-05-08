@@ -13541,8 +13541,14 @@ PrefabInstance:
     - target: {fileID: -665054252309692620, guid: 7d0d3120c4e305d4dbc1989c36211772,
         type: 3}
       propertyPath: ImportPath
-      value: Audio
+      value: Audio/Slime
       objectReference: {fileID: 0}
+    - target: {fileID: -665054252309692620, guid: 7d0d3120c4e305d4dbc1989c36211772,
+        type: 3}
+      propertyPath: ImportMixerGroup
+      value: 
+      objectReference: {fileID: -1882718868813997094, guid: 3628f50e4455b9649966942e5f5d420f,
+        type: 2}
     - target: {fileID: 1754464448345581061, guid: 7d0d3120c4e305d4dbc1989c36211772,
         type: 3}
       propertyPath: m_RootOrder
@@ -13627,6 +13633,11 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5973463720666903704, guid: 10a29ae758bf8001b8c151ec7d7e187d,
+        type: 3}
+      propertyPath: JumpUp
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5973463720666903705, guid: 10a29ae758bf8001b8c151ec7d7e187d,
         type: 3}
       propertyPath: m_RootOrder
